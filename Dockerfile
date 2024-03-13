@@ -1,4 +1,4 @@
-FROM python:3.10.6-bookworm
+FROM python:3.10-bookworm
 
 COPY api /api
 COPY requirements.txt /requirements.txt
