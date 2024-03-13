@@ -1,4 +1,5 @@
 uvicorn
+fastapi
 streamlit==1.13.0
 opencv-python
 tensorflow
