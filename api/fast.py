@@ -17,7 +17,7 @@ app.add_middleware(
 
 @app.get("/home/")
 def home():
-    return {'message': "Hello"}
+    return {'message': "Hi"}
 
 @app.post("/predict/")
 async def numpy_test(test: Request):
