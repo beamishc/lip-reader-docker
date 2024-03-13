@@ -1,11 +1,9 @@
-streamlit
-os
-cv2
+streamlit==1.13.0
+opencv-python
 tensorflow
 numpy
 matplotlib
 imageio
-opencv
 gdown
 google-cloud-bigquery
 google-cloud-storage
