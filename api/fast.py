@@ -53,7 +53,7 @@ def prediction():
     frames_list = full_frames.tolist()
     splits = []
     while len(frames_list) >= 75:
-        splits.append(frames_list[:75])
+        splits.append(np.array(frames_list[:75]))
         frames_list = frames_list[75:]
     model = load_checkpoints()
     result = ''
