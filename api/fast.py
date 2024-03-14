@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from api.load_checkpoints import load_checkpoints
+from api.predict_video import predict_video
 import numpy as np
 import json
 import os
@@ -38,14 +40,21 @@ async def frames_to_model(test: Request):
     else:
         np.savez(filename, results = np.array(all_frames))
 
-    return {"message": "Received data for prediction"
-            , "prediction": "Hello I am mother (TEST DEFAULT)"}
+    return {"message": "Received data for prediction"}
 
 @app.get("/predict/")
 def prediction():
     with np.load('frames.npz') as loaded_npz:
             full_frames = loaded_npz['results']
-    # result = model.predict(full_frames)
-    final_form = str(full_frames.shape)
-    return {"prediction": "Hello I am mother (TEST DEFAULT)"
-            , "final_form": final_form}
+    final_form = full_frames.shape
+    if final_form[0] < 75:
+        return {'prediction': 'not enough frames for prediction'
+            , "num_of_frames_provided": str(final_form)}
+    splits = np.split(full_frames,75,axis=0)
+    model = load_checkpoints()
+    result = ''
+    for x in splits:
+        if x.shape[0] == 75:
+            result = result + predict_video(model, x)
+    return {"prediction": result
+            , "num_of_frames_provided": str(final_form)}
