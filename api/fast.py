@@ -21,7 +21,7 @@ def home():
     return {'message': "Hi"}
 
 @app.post("/send_frames/")
-async def frames_to_model(idx: str, test: Request):
+async def frames_to_model(test: Request):
     data = await test.json()
     print('successful data conversion')
 
