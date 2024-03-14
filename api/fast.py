@@ -22,6 +22,13 @@ app.add_middleware(
 def home():
     return {'message': "Hi"}
 
+@app.get("/clear/")
+def clear():
+    filename = 'frames.npz'
+    if os.path.isfile(filename):
+        os.remove(filename)
+    return {'message': "All clean!"}
+
 @app.post("/send_frames/")
 async def frames_to_model(test: Request):
     data = await test.json()
