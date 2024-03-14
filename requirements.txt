@@ -1,13 +1,5 @@
 uvicorn
 fastapi
-streamlit==1.13.0
-opencv-python
-tensorflow
+tensorflow==2.10.0
 numpy
-matplotlib
-imageio
-gdown
-google-cloud-bigquery
-google-cloud-storage
-ipdb
-ipykernel
+requests

@@ -19,15 +19,17 @@ app.add_middleware(
 def home():
     return {'message': "Hi"}
 
-@app.post("/predict/")
-async def numpy_test(test: Request):
+@app.post("/send_frames/")
+async def frames_to_model(test: Request):
     data = await test.json()
     print('successful data conversion')
-    first_frame = np.array(np.array(json.loads(data))[0])
 
     frames = np.array(json.loads(data))
     all_frames = np.array([np.array(frame)for frame in frames])
     print(all_frames.shape)
     return {"message": "Received data for prediction"
-            , "data": json.dumps(first_frame.tolist())
             , "prediction": "Hello I am mother (TEST DEFAULT)"}
+
+@app.get("/predict/")
+def prediction():
+    return {"prediction": "Hello I am mother (TEST DEFAULT)"}
