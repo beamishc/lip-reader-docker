@@ -43,7 +43,9 @@ async def frames_to_model(test: Request):
 
 @app.get("/predict/")
 def prediction():
-    # with np.load('frames.npz') as loaded_npz:
-    #         full_frames = loaded_npz['results']
+    with np.load('frames.npz') as loaded_npz:
+            full_frames = loaded_npz['results']
     # result = model.predict(full_frames)
-    return {"prediction": "Hello I am mother (TEST DEFAULT)"}
+    final_form = str(full_frames.shape)
+    return {"prediction": "Hello I am mother (TEST DEFAULT)"
+            , "final_form": "final_form"}
