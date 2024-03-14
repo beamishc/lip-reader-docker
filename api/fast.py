@@ -50,7 +50,11 @@ def prediction():
     if final_form[0] < 75:
         return {'prediction': 'not enough frames for prediction'
             , "num_of_frames_provided": str(final_form)}
-    splits = np.split(full_frames,75,axis=0)
+    frames_list = full_frames.tolist()
+    splits = []
+    while len(frames_list) >= 75:
+        splits.append(frames_list[:75])
+        frames_list = frames_list[75:]
     model = load_checkpoints()
     result = ''
     for x in splits:
