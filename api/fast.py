@@ -48,4 +48,4 @@ def prediction():
     # result = model.predict(full_frames)
     final_form = str(full_frames.shape)
     return {"prediction": "Hello I am mother (TEST DEFAULT)"
-            , "final_form": "final_form"}
+            , "final_form": final_form}
